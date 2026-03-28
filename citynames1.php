@@ -25,14 +25,16 @@ if (file_exists($dataFile)) {
 $allCities[] = '{ lat: 33.86, lng: 36.03, name: "Aali en Nahri, Lebanon" }';
 $allCities[] = '{ lat: 45.807, lng: 15.166, name: "Novo Mesto, Slovenia" }';
 $allCities[] = '{ lat: 31.937, lng: 35.039, name: "Modi\'in Illit, Israel" }';
+$allCities[] = '{ lat: 36.373, lng: 3.966, name: "Bouira, Algeria" }';
 
+   
 echo implode(",\n", $allCities);
 echo " ];\n\n";
 
 echo "var createCitiesPlugin = function(citiesData) {
   var cityIcon = new Image();
   cityIcon.crossOrigin = 'Anonymous'; 
-  cityIcon.src = 'https://yourwebsite.com/.../city-icon.png'; // Ensure this points to a valid image file
+  cityIcon.src = 'https://birdbreath.com/images1/city-icon.png'; // Ensure this points to a valid image file
   
   var iconLoaded = false;
   cityIcon.onload = function() { iconLoaded = true; };
@@ -41,6 +43,7 @@ echo "var createCitiesPlugin = function(citiesData) {
 
   return function(planet) {
     // Correct way to handle clicks in Planetary.js
+    // Marker size remains the same as globe size increases for better display of locations.
     planet.onInit(function() {
       var canvas = planet.canvas; // Access the raw canvas
       
