@@ -4,3 +4,5 @@ citynames1.php generates a JavaScript file defining a createCitiesPlugin for Pla
 It features click-detection to select cities, rendering icons or red dots, and dynamic label rendering for selected cities on the front-facing side of the globe.
 
 Added additional ability for red marker to reman the same size as the globe expands, allowing for better visualization of exact city locations.
+
+Added additional ability for red marker to reman the same size as the globe expands on mobile phones.
