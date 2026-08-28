@@ -1,4 +1,4 @@
-README for Updates
+README for Updates for mobile devices
 
 duplicates.php:
 Output duplicate, city name.
