@@ -1,10 +1,19 @@
 //Runs in crontab nighty to convert cities to longitide, latitude, city name format;
-//Aberdeen,England to lat: 54.8823665, lng: -1.6012124, name: "Aberdeen,England"
-//Wichita,Kansas to lat: 37.6922361, lng: -97.3375448, name: "Wichita,Kansas"
 
 <?php
+
+// 1. Force the PHP engine to drop all execution clock boundaries
+set_time_limit(0);
+ini_set('max_execution_time', 0);
+
+
 $inputFile = 'all_cities.txt';
+
 $outputFile = 'mycitylatlng.txt';
+
+// Put this near the top of your script (before the foreach loop)
+$file = fopen("notfound.txt", "w");
+fclose($file);
 
 if (!file_exists($inputFile)) {
     die("Error: input file not found.");
@@ -12,8 +21,6 @@ if (!file_exists($inputFile)) {
 
 $locations = file($inputFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 $out = fopen($outputFile, 'w');
-
-//This header is a characteristic string sent with web requests to let servers identify the client application.
 
 $options = array(
     'http' => array(
@@ -63,6 +70,8 @@ foreach ($locations as $rawLocation) {
             echo "Processed: $rawLocation -> [ " . $result['lat'] . ", " . $result['lon'] . " ]\n";
         } else {
             echo "Location not found in API response: $rawLocation\n";
+            $notfound ="Location not found in API response: $rawLocation\n";
+            file_put_contents("notfound.txt", $notfound, FILE_APPEND | LOCK_EX);
         }
     } else {
          echo "Failed to connect to API for: $rawLocation\n";
